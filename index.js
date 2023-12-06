@@ -126,7 +126,6 @@ console.log(kiekYra);
 
 //b
 const didziausias = Math.max(...randomMasyvas);
-// const didziausioIndex = randomMasyvas.indexOf(didziausias);
 const didziausioIndex = randomMasyvas.reduce((acc, number, index)=>{
     if (number === didziausias){
         acc.push(index);
@@ -136,6 +135,11 @@ const didziausioIndex = randomMasyvas.reduce((acc, number, index)=>{
 console.log(didziausias);
 console.log(didziausioIndex.join(', '));
 console.log(`didziausias skaicius masyve yra : ${didziausias}, jo index'ai yra: ${didziausioIndex.join(', ')}`);
+// su forEach
+//susikurti nauja tuscia masyva i kuri viska desim
+const naujasDidIndex = [];
+const didIndex = randomMasyvas.forEach((el,index)=> el === didziausias ? naujasDidIndex.push(index) : null);
+console.log("didziausu skaicio indexai yra:", naujasDidIndex);
 
 //c
 //1var
@@ -145,22 +149,35 @@ for (let i = 0; i < randomMasyvas.length; i += 2) {
 }
 console.log(`suma yra: ${sumaMasyvo}`);
 //2var
-const sum =randomMasyvas.reduce((acc,num,index) => (index % 2 === 0) ? acc + num: acc, 0);
+const sum =randomMasyvas.reduce((acc,num,index) => (index % 2 === 0) ? acc + num: acc, null);
 console.log(`suma yra: ${sum}`);
 
 //d
-
+//1var
 const naujasMasyvas = randomMasyvas.map((num,index) => num - index);
 console.log(naujasMasyvas);
-
+//2var su forEach
+const atimtiIndex = [];
+const atimtiindexai = randomMasyvas.forEach((el, index) => atimtiIndex.push(el - index));
+console.log(atimtiIndex);
 //e 
-function prideti(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-for(let i = 0; i < 10; i++){
-    randomMasyvas.push(prideti(5,25));
-}
-console.log(randomMasyvas);
+//sita funkcija jau aprasyta virsuj
+// function prideti(min, max) {
+//     return Math.floor(Math.random() * (max - min + 1)) + min;
+//   }
+// for(let i = 0; i < 10; i++){
+//     randomMasyvas.push(randomSkaicius(5,25));
+// }
+// console.log(randomMasyvas);
+
+//nebaigtas
+// for(let i = 0; i<10;i++){
+//     let ketSkaic = randomMasyvas.push(randomSkaicius(5,25));
+//     const ketv = Math.floor(Math.random() * (25 - 5))
+//     console.log(ketSkaic);
+// }
+// console.log(randomMasyvas);
+
 
 //f
 const proriniaiIndex = randomMasyvas.filter((num,index) => index % 2 !== 0 );
@@ -170,10 +187,36 @@ console.log(nePoriniaiIndex);
 
 //g
 
-const pirminisSuPoriniais = randomMasyvas.map(number => (number > 15) ? 15 : number);
+const pirminisSuPoriniais = randomMasyvas.map((number,index) => (number > 15 && index % 2 === 0) ? 0 : number);
 console.log(randomMasyvas);
 console.log(pirminisSuPoriniais);
 
 //h 
 const didUzDesIndex = (el) => el > 10;
 console.log(randomMasyvas.findIndex(didUzDesIndex));
+
+/////////////////////////////4 skaidre
+
+let duomenys = {
+    id: "0001",
+    type: "donut",
+    name: "cake",
+    ppu: 0.55,
+    topping: [
+        { id: "5001", type: "None" },
+        { id: "5002", type: "Glazed" },
+        { id: "5005", type: "Sugar" },
+        { id: "5007", type: "Powdered Sugar" },
+        { id: "5006", type: "Chocolate with Sprinkles" },
+        { id: "5003", type: "Chocolate" },
+        { id: "5004", type: "Maple" },
+    ]
+};
+const duomenysTop = duomenys.topping;
+console.log(duomenysTop);
+// duomenysTop.forEach((el) => console.log(`id: ${el.id}, type: ${el.type}`));
+// duomenysTop.forEach((el) => (object.entries(duomenys).forEach([KeyboardEvent, value]) =>
+//     console.log(key, value));
+
+const masyvas2 = duomenys.topping.forEach((el) => {Object.entries(duomenys).forEach(([key, value]) => console.log(key, value))})
+
